@@ -1,0 +1,3 @@
+[submodule "itensor"]
+	path = itensor
+	url = git://github.com/ITensor/library.git
