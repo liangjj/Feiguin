@@ -14,7 +14,7 @@ LDFLAGS = -L/usr/lib64 -L/usr/lib/ -lblas -llapack -lm -lc
 # change by the actual location of your dmtk folder 
 INCLUDES = -I./ -I/Users/mark/Src/DMRG
 
-CXXCOMPILE = $(CXX) $(INCLUDES) -pthread -ftemplate-depth-150 -DWITH_LAPACK -DWITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing -fno-gcse 
+CXXCOMPILE = $(CXX) $(INCLUDES) -fPIC -pthread -ftemplate-depth-150 -DWITH_LAPACK -DWITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing -fno-gcse 
 
 all: tutorial 
 

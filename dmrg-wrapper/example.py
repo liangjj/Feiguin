@@ -2,4 +2,4 @@
 import ctypes
 
 libprint = ctypes.cdll.LoadLibrary('src/libprint.so')
-libprint['print']('Hello, world!')
+libprint['cprint']('Hello, world!')
