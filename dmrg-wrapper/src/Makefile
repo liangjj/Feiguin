@@ -2,9 +2,6 @@
 # ------ ----------
 CXX = gcc
 
-#ARCH = i386
-ARCH = x86_64
-
 LIBNAME = libprint.so
 
 # Targets
@@ -18,7 +15,7 @@ RM = rm -f
 LDFLAGS = -L./ -L/usr/lib
 INCLUDE = -I./ -I/usr/include
 
-CXXFLAGS = $(INCLUDE) -arch $(ARCH) -fPIC -Wall
+CXXFLAGS = $(INCLUDE) -fPIC -Wall
 
 # Commands
 all: shared
