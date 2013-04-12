@@ -60,7 +60,7 @@ endif
 all: $(SONAME)
 
 $(SONAME): $(OBJECTS)
-	$(CXX) $(SYSFLAGS) $(LDFLAGS) -o $(LIBNAME) $(OBJECTS)
+	$(CXX) $(SYSFLAGS) $(LDFLAGS) -o $(SONAME) $(OBJECTS)
 
 %.o: %.c
 	$(GCC) $(GCCFLAGS) $(GCCEXTRA) -g -c $< -o $@
@@ -75,6 +75,5 @@ $(SONAME): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $(CXXEXTRA) -g -c $< -o $@
 
 clean:
-	$(RM) $(OBJECTS) $(LIBNAME)
-
+	$(RM) $(OBJECTS) $(SONAME)
 

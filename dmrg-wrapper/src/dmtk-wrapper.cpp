@@ -1,7 +1,7 @@
 #ifndef __DMTK_WRAPPER_HPP__
 #define __DMTK_WRAPPER_HPP__
 
-#include "dmtk/dmtk.h"
+#include "dmtk/vector.h"
 
 extern "C" {
   int Left(){ return 1; }
