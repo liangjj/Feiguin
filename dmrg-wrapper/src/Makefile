@@ -1,43 +1,61 @@
 # System-specific parameters
 # --------------- ----------
+PLATFORM = $(shell uname)
+
+GCC = gcc
 CXX = g++
 
-LIBNAME = libprint.so
-EXENAME = exe
-
-# Python source directory.
-PYTHON = /Users/mark/Src/Python-2.7.3/Include
+LIBNAME = lib1.so
 
 # Targets
 # -------
-HEADERS =
-SOURCES = cprint.c cprint2.c main.c
-OBJECTS = $(patsubst %.c,%.o,$(SOURCES)) $(patsubst %.h,%.o,$(HEADERS))
+  # C targets:
+  CHEADERS =
+  CSOURCES = cprint.c cprint2.c
+  COBJECTS = $(patsubst %.c,%.o,$(CSOURCES)) $(patsubst %.h,%.o,$(CHEADERS))
+  # C++ targets:
+  CPPHEADERS =
+  CPPSOURCES = test_class.cpp
+  CPPOBJECTS = $(patsubst %.cpp,%.o,$(CPPSOURCES)) $(patsubst %.hpp,%.o,$(CPPHEADERS))
+
+  OBJECTS = $(COBJECTS) $(CPPOBJECTS)
+
 RM = rm -f
 
 # Compiler / linker / loader flags
 # -------- - ------ - ------ -----
 LDFLAGS = -L./ -L/usr/lib
-INCLUDE = -I./ -I/usr/include -I$(PYTHON)
+INCLUDE = -I./ -I/usr/include
 
-CXXFLAGS = $(INCLUDE) -fPIC -Wall
+CXXFLAGS = $(INCLUDE) -fPIC -Wall -arch x86_64
+
+ifeq ($(PLATFORM),Linux)
+SYSFLAGS = -shared
+endif
+
+ifeq ($(PLATFORM),Darwin)
+SYSFLAGS = -dynamiclib -Wl,-undefined,dynamic_lookup
+endif
 
 # Commands
-all: shared main
-
-main: shared $(OBJECTS)
-	$(CXX) -o $(EXENAME) *.o
+all: shared
 
 shared: $(OBJECTS)
-	$(CXX) -shared $(LDFLAGS) -o $(LIBNAME) $(OBJECTS)
+	$(CXX) $(SYSFLAGS) $(LDFLAGS) -o $(LIBNAME) $(OBJECTS)
 
 %.o: %.c
-	$(CXX) $(CXXFLAGS) -g -c $< -o $@
+	$(GCC) $(CXXFLAGS) -g -c $< -o $@
 
 %.o: %.h
+	$(GCC) $(CXXFLAGS) -g -c $< -o $@
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -g -c $< -o $@
+
+%.o: %.hpp
 	$(CXX) $(CXXFLAGS) -g -c $< -o $@
 
 clean:
-	$(RM) $(OBJECTS) $(LIBNAME) $(EXENAME)
+	$(RM) $(OBJECTS) $(LIBNAME)
 
 

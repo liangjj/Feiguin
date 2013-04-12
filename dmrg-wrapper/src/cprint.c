@@ -5,4 +5,4 @@ int cprint(char * string) {
   printf("%s\n",string);
   cprint2(string);
   return 1;
-}
+};
