@@ -12,7 +12,7 @@ LDFLAGS = -L/usr/lib64 -L/usr/lib/ -lblas -llapack -lm -lc
 #LDFLAGS = -framework veclib # for Mac OS only
 
 # change by the actual location of your dmtk folder 
-INCLUDES = -I./ -I/d/users/adrian/include
+INCLUDES = -I./ -I../../../dmrg-wrapper/
 
 CXXCOMPILE = $(CXX) $(INCLUDES) -pthread -ftemplate-depth-150 -DWITH_LAPACK -DWITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing -fno-gcse 
 

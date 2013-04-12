@@ -1,0 +1,26 @@
+#ifndef __ENUMS_WRAPPER_HPP__
+#define __ENUMS_WRAPPER_HPP__
+
+#include "dmtk/enums.h"
+
+extern "C" {
+  #define GETENUM(id) unsigned int id() { return dmtk::id; }
+
+  GETENUM(LEFT2RIGHT)
+  GETENUM(RIGHT2LEFT)
+
+  GETENUM(MASK_BLOCK1)
+  GETENUM(MASK_BLOCK2)
+  GETENUM(MASK_BLOCK3)
+  GETENUM(MASK_BLOCK4)
+
+  GETENUM(BLOCK_NONE)
+  GETENUM(BLOCK1)
+  GETENUM(BLOCK2)
+  GETENUM(BLOCK3)
+  GETENUM(BLOCK4)
+
+  #undef GETENUM
+};
+
+#endif//__ENUMS_WRAPPER_HPP__

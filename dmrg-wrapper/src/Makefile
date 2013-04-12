@@ -9,7 +9,7 @@
 
   # Extra compiler flags to use.
   GCCEXTRA = -pthread -D WITH_LAPACK -D WITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing
-  GXXEXTRA = -pthread -ftemplate-depth-150 -D WITH_LAPACK -D WITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing
+  CXXEXTRA = -pthread -ftemplate-depth-150 -D WITH_LAPACK -D WITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing
 
   # Library directors and libraries to use.
   LIBDIRS = ./ /usr/lib/
@@ -33,7 +33,7 @@
   COBJECTS = $(patsubst %.c,%.o,$(CSOURCES)) $(patsubst %.h,%.o,$(CHEADERS))
 
   # C++ targets:
-  CPPHEADERS = 
+  CPPHEADERS =
   CPPSOURCES = test_class.cpp dmtk-wrapper.cpp
   CPPOBJECTS = $(patsubst %.cpp,%.o,$(CPPSOURCES)) $(patsubst %.hpp,%.o,$(CPPHEADERS))
 
