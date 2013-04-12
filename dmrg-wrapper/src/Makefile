@@ -1,11 +1,25 @@
 # System-specific parameters
 # --------------- ----------
-PLATFORM = $(shell uname)
+  # Automatic platform identification.
+  PLATFORM = $(shell uname)
 
-GCC = gcc
-CXX = g++
+  # C and C++ compilers, respectively.
+  GCC = gcc
+  CXX = g++
 
-LIBNAME = lib1.so
+  # Library directors and libraries to use.
+  LIBDIRS = ./ /usr/lib
+  LIBS = blas lapack m c
+
+  # Source directors to use.
+  INCDIRS = ./ ../ /usr/include
+
+  # Output name for the shared object.
+  SONAME = lib1.so
+
+  # Clean-up command.
+  RM = rm -Rf
+
 
 # Targets
 # -------
@@ -13,20 +27,21 @@ LIBNAME = lib1.so
   CHEADERS =
   CSOURCES = cprint.c cprint2.c
   COBJECTS = $(patsubst %.c,%.o,$(CSOURCES)) $(patsubst %.h,%.o,$(CHEADERS))
+
   # C++ targets:
-  CPPHEADERS =
-  CPPSOURCES = test_class.cpp
+  CPPHEADERS = 
+  CPPSOURCES = test_class.cpp dmtk-wrapper.cpp
   CPPOBJECTS = $(patsubst %.cpp,%.o,$(CPPSOURCES)) $(patsubst %.hpp,%.o,$(CPPHEADERS))
 
   OBJECTS = $(COBJECTS) $(CPPOBJECTS)
 
-RM = rm -f
 
 # Compiler / linker / loader flags
 # -------- - ------ - ------ -----
-LDFLAGS = -L./ -L/usr/lib
-INCLUDE = -I./ -I/usr/include
+LDFLAGS = $(patsubst %,-L%,$(LIBDIRS)) $(patsubst %,-l%,$(LIBS))
+INCLUDE = $(patsubst %,-I%,$(INCDIRS))
 
+GCCFLAGS = $(INCLUDE) -fPIC -Wall
 CXXFLAGS = $(INCLUDE) -fPIC -Wall
 
 ifeq ($(PLATFORM),Linux)
@@ -38,16 +53,16 @@ SYSFLAGS = -dynamiclib -Wl,-undefined,dynamic_lookup
 endif
 
 # Commands
-all: shared
+all: $(SONAME)
 
-shared: $(OBJECTS)
+$(SONAME): $(OBJECTS)
 	$(CXX) $(SYSFLAGS) $(LDFLAGS) -o $(LIBNAME) $(OBJECTS)
 
 %.o: %.c
-	$(GCC) $(CXXFLAGS) -g -c $< -o $@
+	$(GCC) $(GCCFLAGS) -g -c $< -o $@
 
 %.o: %.h
-	$(GCC) $(CXXFLAGS) -g -c $< -o $@
+	$(GCC) $(GCCFLAGS) -g -c $< -o $@
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -g -c $< -o $@
