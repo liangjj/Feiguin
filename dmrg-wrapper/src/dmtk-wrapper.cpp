@@ -4,9 +4,9 @@
 #include "dmtk/dmtk.h"
 
 extern "C" {
-  int Left(){ return dmtk::LEFT; }
-  int Right(){ return dmtk::RIGHT; }
-  int Center(){ return dmtk::CENTER; }
+  int Left(){ return 1; }
+  int Right(){ return 2; }
+  int Center(){ return 3; }
 };
 
 #endif//__DMTK_WRAPPER_HPP__

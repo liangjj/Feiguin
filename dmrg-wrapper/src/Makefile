@@ -7,12 +7,16 @@
   GCC = gcc
   CXX = g++
 
+  # Extra compiler flags to use.
+  GCCEXTRA = -pthread -D WITH_LAPACK -D WITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing
+  GXXEXTRA = -pthread -ftemplate-depth-150 -D WITH_LAPACK -D WITH_COMPLEX -funroll-loops -O3 -fstrict-aliasing
+
   # Library directors and libraries to use.
-  LIBDIRS = ./ /usr/lib
+  LIBDIRS = ./ /usr/lib/
   LIBS = blas lapack m c
 
   # Source directors to use.
-  INCDIRS = ./ ../ /usr/include
+  INCDIRS = ./ /usr/include/ ../
 
   # Output name for the shared object.
   SONAME = lib1.so
@@ -59,16 +63,16 @@ $(SONAME): $(OBJECTS)
 	$(CXX) $(SYSFLAGS) $(LDFLAGS) -o $(LIBNAME) $(OBJECTS)
 
 %.o: %.c
-	$(GCC) $(GCCFLAGS) -g -c $< -o $@
+	$(GCC) $(GCCFLAGS) $(GCCEXTRA) -g -c $< -o $@
 
 %.o: %.h
-	$(GCC) $(GCCFLAGS) -g -c $< -o $@
+	$(GCC) $(GCCFLAGS) $(GCCEXTRA) -g -c $< -o $@
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -g -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(CXXEXTRA) -g -c $< -o $@
 
 %.o: %.hpp
-	$(CXX) $(CXXFLAGS) -g -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(CXXEXTRA) -g -c $< -o $@
 
 clean:
 	$(RM) $(OBJECTS) $(LIBNAME)
