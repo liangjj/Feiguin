@@ -27,7 +27,7 @@ RM = rm -f
 LDFLAGS = -L./ -L/usr/lib
 INCLUDE = -I./ -I/usr/include
 
-CXXFLAGS = $(INCLUDE) -fPIC -Wall -arch x86_64
+CXXFLAGS = $(INCLUDE) -fPIC -Wall
 
 ifeq ($(PLATFORM),Linux)
 SYSFLAGS = -shared
