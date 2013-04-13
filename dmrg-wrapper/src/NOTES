@@ -1,0 +1,1 @@
+array_util.h needs some functions to be inlined, otherwise they can cause compile-time symbol conflicts.
