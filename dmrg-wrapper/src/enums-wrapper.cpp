@@ -1,5 +1,5 @@
-#ifndef __ENUMS_WRAPPER_HPP__
-#define __ENUMS_WRAPPER_HPP__
+#ifndef __ENUMS_WRAPPER_CPP__
+#define __ENUMS_WRAPPER_CPP__
 
 #include "dmtk/enums.h"
 
@@ -23,4 +23,4 @@ extern "C" {
   #undef GETENUM
 };
 
-#endif//__ENUMS_WRAPPER_HPP__
+#endif//__ENUMS_WRAPPER_CPP__

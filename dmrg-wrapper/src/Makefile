@@ -19,7 +19,7 @@
   INCDIRS = ./ /usr/include/ ../
 
   # Output name for the shared object.
-  SONAME = lib1.so
+  SONAME = dmtk.so
 
   # Clean-up command.
   RM = rm -Rf
@@ -34,7 +34,7 @@
 
   # C++ targets:
   CPPHEADERS =
-  CPPSOURCES = test_class.cpp dmtk-wrapper.cpp
+  CPPSOURCES = test_class.cpp dmtk-wrapper.cpp enums-wrapper.cpp vector-wrapper.cpp
   CPPOBJECTS = $(patsubst %.cpp,%.o,$(CPPSOURCES)) $(patsubst %.hpp,%.o,$(CPPHEADERS))
 
   OBJECTS = $(COBJECTS) $(CPPOBJECTS)
