@@ -1,4 +1,5 @@
 #include "test_class.hpp"
+#include <cstdlib>
 
 Test::Test() {
   bar = 1;
@@ -7,10 +8,11 @@ Test::Test() {
 Test::~Test() {};
 
 unsigned int Test::foo() {
-  return 1;
+  return 5;
 };
 
 extern "C" {
   Test* Test_new(){ return new Test(); }
-  void Test_foo(Test* test) { test->foo(); }
+  unsigned int Test_foo(Test* test) { return test->foo(); }
+  int* Test_array() { int * i = (int*)malloc(sizeof(int)*5); return i; }
 };

@@ -29,12 +29,12 @@
 # -------
   # C targets:
   CHEADERS =
-  CSOURCES = cprint.c cprint2.c
+  CSOURCES =
   COBJECTS = $(patsubst %.c,%.o,$(CSOURCES)) $(patsubst %.h,%.o,$(CHEADERS))
 
   # C++ targets:
   CPPHEADERS =
-  CPPSOURCES = test_class.cpp dmtk-wrapper.cpp enums-wrapper.cpp vector-wrapper.cpp
+  CPPSOURCES = test_class.cpp test_functions.cpp dmtk-wrapper.cpp enums-wrapper.cpp vector-wrapper.cpp
   CPPOBJECTS = $(patsubst %.cpp,%.o,$(CPPSOURCES)) $(patsubst %.hpp,%.o,$(CPPHEADERS))
 
   OBJECTS = $(COBJECTS) $(CPPOBJECTS)
