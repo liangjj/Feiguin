@@ -1,10 +1,18 @@
 #!/usr/bin/env python
 
 import ctypes
-import numpy
+
+class Vector(ctypes.Structure):
+  """
+  Test class wrapper.
+  """
+  _fields_ = [
+    ("vec",ctypes.POINTER(ctypes.c_double)),
+  ]
+
+v = Vector()
 
 lib = ctypes.cdll.LoadLibrary('dmtk.so')
-#lib.get_array.restype = numpy.ctypeslib.ndpointer(dtype=numpy.float64,ndim=1,shape=(5,))
-a = lib.get_array(5)
-#for i in a: print i
-lib.free_array(a)
+lib.get_array(ctypes.byref(v),5)
+for i in xrange(6): print v.vec[i]
+lib.free_array(ctypes.byref(v))

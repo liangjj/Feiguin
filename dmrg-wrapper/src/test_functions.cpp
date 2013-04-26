@@ -2,10 +2,22 @@
 #define __TEST_FUNCTIONS_CPP__
 
 #include <cstdlib>
+#include <cstdio>
+
+using namespace std;
+
+struct PYVector {
+  double * vec;
+};
 
 extern "C" {
-  double * get_array(int s) { return new double[s]; }
-  void free_array(void* a) { free(a); }
+  void get_array(struct PYVector * v, unsigned int s) {
+    v->vec = new double[s];
+    for(int i = 0; i < s; i++) { v->vec[i] = (double)i; }
+  }
+  void free_array(struct PYVector * v) {
+    free(v->vec);
+  }
 };
 
 #endif//__TEST_FUNCTIONS_CPP__
