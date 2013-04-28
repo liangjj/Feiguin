@@ -13,7 +13,7 @@ struct PYVector {
 extern "C" {
   void get_array(struct PYVector * v, unsigned int s) {
     v->vec = new double[s];
-    for(int i = 0; i < s; i++) { v->vec[i] = (double)i; }
+    for(unsigned int i = 0; i < s; i++) { v->vec[i] = (double)i; }
   }
   void free_array(struct PYVector * v) {
     free(v->vec);
