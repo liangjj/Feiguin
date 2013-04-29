@@ -12,7 +12,7 @@ unsigned int Test::foo() {
 };
 
 extern "C" {
-  Test* Test_new(){ return new Test(); }
+  Test* Test_new(){ return new Test(); printf("2");}
   unsigned int Test_foo(Test* test) { return test->foo(); }
   int* Test_array() { int * i = (int*)malloc(sizeof(int)*5); return i; }
 };
